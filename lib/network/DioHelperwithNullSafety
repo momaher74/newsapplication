@@ -1,0 +1,41 @@
+import 'package:dio/dio.dart';
+
+class DioHelper {
+  static late Dio  dio;
+
+  static init() {
+    dio = Dio(BaseOptions(
+      baseUrl: 'https://newsapi.org/v2/',
+      receiveDataWhenStatusError: true,
+    ));
+  }
+
+  static Future getData({
+    required url,
+    required query,
+     headers ,
+  }) {
+   // dio.options.headers = headers;
+    return dio.get(url, queryParameters: query);
+  }
+
+  static Future postData({
+    required url,
+    required data,
+    required query,
+     headers ,
+  }) {
+    //dio.options.headers = headers;
+    return dio.post(url, data: data);
+  }
+
+  static Future putData({
+    required url,
+    required data,
+    required query,
+    required headers ,
+  }) {
+    dio.options.headers = headers;
+    return dio.put(url, data:data , queryParameters: query);
+  }
+}
